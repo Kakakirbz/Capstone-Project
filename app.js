@@ -28,12 +28,56 @@ app.get('/LearningMaterials', (req,res) => {
     })
 });
 
-app.get('/LearningMaterial/:id', (req,res)  => {
+app.get('/LearningMaterial/:id/info', (req,res)  => {
 
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
 
     connection.query(sql, (err, result) => {
-        res.render('pages/LearningMaterial', {
+        res.render('pages/LearningMaterialInfo', {
+            items: result
+        });
+        console.log(result);
+    })
+});
+
+app.get('/LearningMaterial/:id/video',function(req,res) {
+    var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
+
+    connection.query(sql, (err, result) => {
+        res.render('pages/LearningMaterialVideo', {
+            items: result
+        });
+        console.log(result);
+    })
+});
+
+app.get('/LearningMaterial/:id/files',function(req,res) {
+    var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
+
+    connection.query(sql, (err, result) => {
+        res.render('pages/LearningMaterialFiles', {
+            items: result
+        });
+        console.log(result);
+    })
+});
+
+app.get('/LearningMaterial/:id/activity',function(req,res) {
+    var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
+
+    connection.query(sql, (err, result) => {
+        res.render('pages/LearningMaterialActivities', {
+            items: result
+        });
+        console.log(result);
+    })
+});
+
+app.get('/LearningMaterial/:id/reference',function(req,res) {
+    var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
+
+    connection.query(sql, (err, result) => {
+        res.render('pages/LearningMaterialReference', {
             items: result
         });
         console.log(result);
@@ -68,12 +112,17 @@ app.post('/PostLearningMaterial', urlencodedParser, (req,res) => {
     insertReference(reference);
 
     if(req.files) {
+        console.log(req.files);
         var length = req.files.filename.length;
+        var filename = null;
+        var filetype = null;
         if(length > 1) {
             for(var i=0; i < length; i++) {
                 console.log(req.files.filename[i].name);
                 var file = req.files.filename[i];
-                var filename = file.name;
+                filename = file.name;
+                filetype = file.mimetype;
+                console.log(filetype);
 
                 file.mv('./uploads/'+filename, (err) => {
                     if(err) {
@@ -81,11 +130,12 @@ app.post('/PostLearningMaterial', urlencodedParser, (req,res) => {
                     }
                 })
 
-                insertFile(filename);
+                insertFile(filename, filetype);
             }
         } else {
             var file = req.files.filename;
-            var filename = file.name;
+            filename = file.name;
+            filetype = file.mimetype;
 
             file.mv('./uploads/'+filename, (err) => {
                 if(err){
@@ -93,7 +143,7 @@ app.post('/PostLearningMaterial', urlencodedParser, (req,res) => {
                 }
             })
 
-            insertFile(filename);
+            insertFile(filename, filetype);
         }
     }
 
@@ -118,12 +168,12 @@ app.listen(3000, function(){
     console.log('Listening to port 3000');
 })
 
-function insertFile(filename) {
+function insertFile(filename, filetype) {
     var sql = "SELECT post_id FROM post ORDER BY post_id DESC LIMIT 1";
     connection.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result[0].post_id);
-        var insert = "INSERT INTO file (file_id, post_id, filename) VALUES (NULL, "+result[0].post_id+", '"+filename+"')";
+        var insert = "INSERT INTO file (file_id, post_id, filename, filetype) VALUES (NULL, "+result[0].post_id+", '"+filename+"', '"+filetype+"')";
         connection.query(insert, (err, result) => {
             if(err) throw err;
             //console.log('Inserted');

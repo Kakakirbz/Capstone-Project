@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include ../partials/head %>
+	</head>
+	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
+		<div class="container navbarMaterial">
+			<% include ../partials/navbarInfo %>
+		</div>
+		
+		<div class="container title">
+			<h4><%= items[0]['title'] %></h4>
+			<h5><%= items[0]['description'] %></h5>
+		</div>
+	</body>
+</html>
+
+<script>
+	$(".del").on("click",function(){
+        return confirm("Delete Activity?");
+    });
+</script>
