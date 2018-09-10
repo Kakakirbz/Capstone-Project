@@ -10,5 +10,16 @@
 		<div class="container navbarMaterial">
 			<% include ../partials/navbarFiles %>
 		</div>
+		<div class="container">
+			<% if (join === undefined || join.length == 0) { -%>
+				<h5 class="text-center">There are no available files...</h5>
+			<% } -%>	
+			<% for (var i = 0; i < join.length; i++) { -%>
+				<% if (join[i]['filetype'] == "video/mp4") { -%>
+					<h5 class="text-center">There are no available files...</h5>
+					<% i = join.length -%>
+				<% } -%>
+			<% } -%>
+		</div>
 	</body>
 </html>

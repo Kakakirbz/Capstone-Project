@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(upload());
 
 app.get('/LearningMaterials', (req,res) => {
-    var sql = "SELECT * FROM post";
+    var sql = "SELECT * FROM post JOIN faculty ON faculty.faculty_id = post.faculty_id";
 
     connection.query(sql, (err, result) => {
         res.render('pages/LearningMaterials', {
@@ -28,6 +28,7 @@ app.get('/LearningMaterials', (req,res) => {
     })
 });
 
+// Navigation Info
 app.get('/LearningMaterial/:id/info', (req,res)  => {
 
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
@@ -40,40 +41,58 @@ app.get('/LearningMaterial/:id/info', (req,res)  => {
     })
 });
 
-app.get('/LearningMaterial/:id/video',function(req,res) {
+// Navigation Video
+app.get('/LearningMaterial/:id/video', (req,res) => {
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
 
-    connection.query(sql, (err, result) => {
-        res.render('pages/LearningMaterialVideo', {
-            items: result
-        });
-        console.log(result);
+    connection.query(sql, (err, results) => {
+        var joinStatement = `SELECT * FROM post JOIN file ON post.post_id = file.post_id WHERE post.post_id = ${req.params.id}`;
+        connection.query(joinStatement, (err, result) => {
+            res.render('pages/LearningMaterialVideo', {
+                items: results,
+                join: result
+            });
+            console.log(result);
+        })
+        console.log(results);
     })
 });
 
-app.get('/LearningMaterial/:id/files',function(req,res) {
+// Navigation Files
+app.get('/LearningMaterial/:id/files', (req,res) => {
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
 
-    connection.query(sql, (err, result) => {
-        res.render('pages/LearningMaterialFiles', {
-            items: result
-        });
-        console.log(result);
+    connection.query(sql, (err, results) => {
+        var joinStatement = `SELECT * FROM post JOIN file ON post.post_id = file.post_id WHERE post.post_id = ${req.params.id}`;
+        connection.query(joinStatement, (err, result) => {
+            res.render('pages/LearningMaterialFiles', {
+                items: results,
+                join: result
+            });  
+        })
+        console.log(results);
     })
 });
 
-app.get('/LearningMaterial/:id/activity',function(req,res) {
+// Navigation Activity
+app.get('/LearningMaterial/:id/activity', (req,res) => {
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
 
-    connection.query(sql, (err, result) => {
-        res.render('pages/LearningMaterialActivities', {
-            items: result
-        });
-        console.log(result);
+    connection.query(sql, (err, results) => {
+        var joinStatement = `SELECT * FROM post JOIN suggested_activity ON post.post_id = suggested_activity.post_id WHERE post.post_id = ${req.params.id}`;
+        connection.query(joinStatement, (err, result) => {
+            res.render('pages/LearningMaterialActivities', {
+                items: results,
+                join: result
+            });  
+            console.log(result);
+        })
+        console.log(results);
     })
 });
 
-app.get('/LearningMaterial/:id/reference',function(req,res) {
+// Navigation Reference
+app.get('/LearningMaterial/:id/reference', (req,res) => {
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
 
     connection.query(sql, (err, result) => {
@@ -84,10 +103,12 @@ app.get('/LearningMaterial/:id/reference',function(req,res) {
     })
 });
 
+// Renders form to post learning Material
 app.get('/PostLearningMaterial', (req,res) => {
     res.render('pages/index');
 })
 
+// Post request
 app.post('/PostLearningMaterial', urlencodedParser, (req,res) => {
 
     var generalTitle = req.body.generalTitle;
@@ -150,11 +171,12 @@ app.post('/PostLearningMaterial', urlencodedParser, (req,res) => {
     res.redirect('PostLearningMaterial');
 })
 
-app.get('/editmaterial',function(req,res) {
+app.get('/editmaterial', (req,res) => {
     
 });
 
-app.get('/deletematerial/:id',function(req,res) {
+// Delete material
+app.get('/deletematerial/:id', (req,res) => {
     console.log(req.params.id);
 
     var sql = `DELETE FROM post WHERE post_id = ${req.params.id}`;
@@ -185,7 +207,7 @@ function insertActivity(title, content) {
     var sql = "SELECT post_id FROM post ORDER BY post_id DESC LIMIT 1";
     connection.query(sql, (err, result) => {
         if (err) throw err;
-        var insert = "INSERT INTO suggested_activity (suggested_activity_id, post_id, title, content) VALUES (NULL, "+result[0].post_id+", '"+title+"', '"+content+"')";
+        var insert = "INSERT INTO suggested_activity (suggested_activity_id, post_id, activity_title, content) VALUES (NULL, "+result[0].post_id+", '"+title+"', '"+content+"')";
         connection.query(insert, (err,result) => {
             //console.log('Yehey');
         })

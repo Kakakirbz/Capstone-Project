@@ -11,9 +11,17 @@
 			<div class="col-lg-12" style="margin-top: 50px;">
 				<h2>List of Learning Materials</h2>
 			</div>
-			<div class="col-lg-12" style="margin-top: 25px;">
+			<div class="row">
 				<% for (var i = 0; i < items.length; i++) { -%>
-					<a href="LearningMaterial/<%= items[i].post_id %>/info"><h5><%= items[i].title %></h5></a>	
+					<div class="col-lg-4">
+						<div class="card course-content">
+							<div class="card-body">
+								<a href="/LearningMaterial/<%= items[i]['post_id']%>/info"><h4><%= items[i]['title'] %></h4></a>
+								<span><%= items[i]['firstName']%> <%= items[i]['lastName'] %></span><br><br>
+								<span><i><%= items[i]['description'] %></i></span>
+							</div>
+						</div>
+					</div>
 				<% } -%>
 			</div>
 		</div>

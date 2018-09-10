@@ -7,8 +7,21 @@
 		<header>
 			<% include ../partials/header %>
 		</header>
+		<button class="btn btn-danger btn-md"><i class="far fa-trash-alt"></i> Delete</button>
 		<div class="container navbarMaterial">
 			<% include ../partials/navbarVideo %>
+		</div>
+		<div class="container">
+			<% if (join === undefined || join.length == 0) { -%>
+				<h5 class="text-center">There are no available videos...</h5>
+			<% } -%>	
+
+			<% for (var i = 0; i < join.length; i++) { -%>
+				<h5><%= join[i]['filename'] %></h5>
+				<video width="320" height="240" controls>
+					<source src="/uploads/<%= join[i]['filename'] %>" type="<%= join[i]['filetype'] %>">
+				</video>
+			<% } -%>
 		</div>
 	</body>
 </html>

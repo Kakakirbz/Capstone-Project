@@ -10,5 +10,9 @@
 		<div class="container navbarMaterial">
 			<% include ../partials/navbarActivities %>
 		</div>
+		<% if (join === undefined || join.length == 0) { -%>
+			<h5 class="text-center">There are no available activites...</h5>
+		<% } -%>
+		
 	</body>
 </html>
