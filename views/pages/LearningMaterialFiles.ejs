@@ -16,7 +16,13 @@
 				<div class="nofileTitle">
 					<h5 class="">There are no available files...</h5>	
 				</div>
+			<% } else { -%>
+				<% for (var i = 0; i < join.length; i++) { -%>
+					<h4><%= join[i]['filename'] %></h4>
+					<a href="/download/<%= join[i]['file_id']%>"><button class="btn btn-outline-success"><i class="fas fa-download"></i></button></a>
+				<% } -%>
 			<% } -%>
+
 			
 		</div>
 	</body>

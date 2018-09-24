@@ -122,8 +122,9 @@ app.get('/LearningMaterial/:id/files', (req,res) => {
     var sql = `SELECT * FROM post WHERE post_id = ${req.params.id}`;
 
     connection.query(sql, (err, results) => {
-        var joinStatement = `SELECT * FROM post JOIN file ON post.post_id = file.post_id WHERE post.post_id = ${req.params.id}`;
+        var joinStatement = `SELECT * FROM file WHERE post_id = ${req.params.id}`;
         connection.query(joinStatement, (err, result) => {
+            console.log(result);
             res.render('pages/LearningMaterialFiles', {
                 items: results,
                 join: result
@@ -451,6 +452,14 @@ app.get('/LearningMaterial/:id/delete', (req,res) => {
 
     
 });
+
+app.get('/download/:id', (req, res) => {
+    var sql = `SELECT filename FROM file WHERE file_id = ${req.params.id}`;
+
+    connection.query(sql, (err, result) => {
+        res.download('./public/uploads/' + result[0]['filename']);
+    })
+})
 
 app.listen(3000, () => { console.log('Listening to port 3000'); })
 
