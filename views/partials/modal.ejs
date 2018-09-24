@@ -1,0 +1,52 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#SuggestedActivityTab" aria-controls="SuggestedActivityTab" role="tab" data-toggle="tab"> Add Activity </a>
+
+                        </li>
+                        <li role="presentation"><a href="#AddReferenceTab" aria-controls="AddReferenceTab" role="tab" data-toggle="tab"> Add Reference </a>
+
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="SuggestedActivityTab">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h5>Add Suggested Activity</h5>
+                                </div>
+                                <label class="topPostLearningMaterial" for="activityTitle">Activity Title</label>
+                                <input type="text" name="activityTitle" class="form-control" id="_title" placeholder="Enter Title">
+                            
+                                <label for="activityDescription" class="description">Description</label>
+                                <textarea class="form-control" name="activityDescription" id="_description" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="AddReferenceTab">
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <h5>Add Reference</h5>
+                                </div>
+                                <label class="topPostLearningMaterial" for="refereceTitle">Referece</label>
+                                <input type="text" name="reference" class="form-control" id="_reference" placeholder="Enter Referece">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="add()" class="btn btn-primary" id="save" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

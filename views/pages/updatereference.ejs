@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include ../partials/head %>
+	</head>
+	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
+		<div class="container">
+			<div class="row">
+				<h3 class="mx-auto">Update Reference</h3>	
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 offset-lg-3">
+						<% if (err) { %>
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>Holy guacamole!</strong> You shouldn't leave it blank.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						<% } %>
+						<form action="/updatereference/<%= result[0]['reference_id']%>" method="POST" autocomplete="off">
+							<label for="referenceTitle">Reference Title</label>
+							<input type="text" name="title" class="form-control" value="<%= result[0]['reference']%>">
+							<button type="submit" class="btn btn-outline-dark">Submit</button>
+						</form>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

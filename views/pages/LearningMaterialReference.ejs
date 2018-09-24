@@ -10,5 +10,26 @@
 		<div class="container navbarMaterial">
 			<% include ../partials/navbarReference %>
 		</div>
+		<% if (join === undefined || join.length == 0) { -%>
+			<h5 class="text-center">There are no available references...</h5>
+		<% } else { -%>
+			<div class="container referenceTitle">
+				<h3>List of references</h3>
+			</div>
+			<div class="container">
+				<% for (var i = 0; i < join.length; i++) { -%>
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="6">
+								<h5><%= join[i]['reference']%></h5>	
+							</div>
+							<div class="col-lg-6">
+								<a href="/updatereference/<%= join[i]['reference_id']%>"><button type="button" class="btn btn-outline-success"><i class="far fa-edit"></i></button></a>
+							</div>							
+						</div>
+					</div>
+				<% } -%>
+			</div>
+		<% } -%>
 	</body>
 </html>

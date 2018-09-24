@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include ../partials/head %>
+	</head>
+	<body>
+		<header>
+			<% include ../partials/header %>
+		</header>
+		<div class="container">
+			<div class="row">
+				<h3 class="mx-auto">Update Activity</h3>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 offset-lg-3">
+						<% if (err) { %>
+							<div class="alert alert-danger alert-dismissible fade show" role="alert">
+								<strong>Holy guacamole!</strong> You shouldn't leave it blank.
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						<% } %>
+						<form action="/updateactivity/<%= result[0]['suggested_activity_id']%>" method="POST" autocomplete="off">
+							<label for="activityTitle">Activity Title</label>
+							<input type="text" name="activityTitle" class="form-control" value="<%= result[0]['activity_title']%>">
+
+							<label for="activityDescription">Activity Description</label>
+							<textarea name="activityDescription" class="form-control" rows="5"><%= result[0]['content']%></textarea>
+
+							<button type="submit" class="btn btn-outline-dark">Submit</button>
+						</form>
+					</div>
+				</div>					
+			</div>
+		</div>
+	</body>
+</html>
