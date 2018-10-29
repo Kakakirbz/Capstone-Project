@@ -38,7 +38,11 @@
 						<% } %>
 
 						<div class="form-group">
-							<label for="videoTitle">Video Title</label>
+							<div style="margin-bottom: 5px;">
+                                        <span style="color: red;">* Required</span>
+                                    </div>
+							<label for="videoTitle">Video Title <span style="color: red;">*</span></label>
+
 							<input type="text" name="videoTitle" class="form-control">
 
 							<input type="file" name="video" accept="video/*" style="margin-top: 15px;">

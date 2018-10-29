@@ -251,7 +251,7 @@ app.get('/UploadVideo', (req,res) => {
 // Post Request for Upload Video Page
 app.post('/UploadVideo', (req,res,next) => {
     uploadVideo(req, res, (err) => {
-        var videoTitle = req.body.video;
+        var videoTitle = req.body.videoTitle;
 
         if (err) {
             console.log('ni sulod ko sa error');

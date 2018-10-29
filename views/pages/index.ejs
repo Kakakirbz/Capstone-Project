@@ -16,116 +16,78 @@
         </div>
         <div class="container">
             <form action="/PostLearningMaterial" method="POST" enctype="multipart/form-data" role="form" class="formPostLearningMaterial" autocomplete="off">
-                <div class="">
-                    <div class="row">
-                        <div class="col-lg-6 offset-lg-3">
-                            <% if (files) { %>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>Holy guacamole!</strong> There are no files selected.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            <% } %>
-                            <% if (input) { %>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>Holy guacamole!</strong> Please fill out all that are marked required.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            <% } %>
-                            <% if (wrongfile) { %>
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <strong>Holy guacamole!</strong> Upload image, word, powerpoint, excel or pdf files please.
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            <% } %>
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <h5>General Information</h5>
-                                </div>
-                                <span class="topPostLearningMaterial" id="required">Required (*)</span><br>
-                                <label for="generalTitle">Material Title <span>*</span></label>
-                                <input type="text" name="generalTitle" class="form-control" id="generalTitle" placeholder="Enter Title">
-                            
-                                <label for="generalDescription" class="description">Description <span>*</span></label>
-                                <textarea class="form-control" name="generalDescription" id="generalDescription" rows="5"></textarea>
-
-                                <div class="custom-control custom-checkbox checkboxLearningMaterial">
-                                    <input type="checkbox" name="checkbox" class="custom-control-input" id="checkbox">
-                                    <label class="custom-control-label" for="checkbox">Make this downloadable to other schools</label>
-                                </div>
-                                <input type="file" name="filename" multiple accept="image/*, .doc, .docx, .pdf, .txt, .xlsx, .pptx">
-                                <small id="fileHelp" class="form-text text-muted"><i>Upload image, word, powerpoint, excel or pdf files</i></small>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="margin-top: 10px; margin-bottom: 10px;">Add Activity/Reference</button>
-                                <button type="submit" class="btn btn-success btn-lg">SUBMIT</button>
-                            </div>
-                                
-                                    <div class="col-lg-12">
-                                        
-                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div role="tabpanel">
-                                                            <!-- Nav tabs -->
-                                                            <ul class="nav nav-tabs" role="tablist">
-                                                                <li role="presentation" class="active"><a href="#SuggestedActivityTab" aria-controls="SuggestedActivityTab" role="tab" data-toggle="tab"> Add Activity </a>
-
-                                                                </li>
-                                                                <li role="presentation"><a href="#AddReferenceTab" aria-controls="AddReferenceTab" role="tab" data-toggle="tab"> Add Reference </a>
-
-                                                                </li>
-                                                            </ul>
-                                                            <!-- Tab panes -->
-                                                            <div class="tab-content">
-                                                                <div role="tabpanel" class="tab-pane active" id="SuggestedActivityTab">
-                                                                    <div class="form-group">
-                                                                        <div class="text-center">
-                                                                            <h5>Add Suggested Activity</h5>
-                                                                        </div>
-                                                                        <label class="topPostLearningMaterial" for="activityTitle">Activity Title <span>*</span></label>
-                                                                        <input type="text" name="activityTitle" class="form-control" id="_title" placeholder="Enter Title">
-                                                                    
-                                                                        <label for="activityDescription" class="description">Description <span>*</span></label>
-                                                                        <textarea class="form-control" name="activityDescription" id="_description" rows="5"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div role="tabpanel" class="tab-pane" id="AddReferenceTab">
-                                                                    <div class="form-group">
-                                                                        <div class="text-center">
-                                                                            <h5>Add Reference</h5>
-                                                                        </div>
-                                                                        <label class="topPostLearningMaterial" for="refereceTitle">Referece <span>*</span></label>
-                                                                        <input type="text" name="reference" class="form-control" id="_reference" placeholder="Enter Referece">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" id="save" data-dismiss="modal">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
+                    <div class="row" style="margin-bottom: 50px;">
+                            <div class="col-lg-6 offset-lg-3">
+                                <% if (files) { %>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>Holy guacamole!</strong> There are no files selected.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
+                                <% } %>
+                                <% if (input) { %>
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>Holy guacamole!</strong> Please fill out all that are marked required.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <% } %>
+                                <% if (wrongfile) { %>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>Holy guacamole!</strong> Upload image, word, powerpoint, excel or pdf files please.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <% } %>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <h5>General Information</h5>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <span style="color: red;">* Required</span>
+                                    </div>
+                                    
+                                    <label for="generalTitle">Material Title <span style="color: red;">*</span></label>
+                                    <input type="text" name="generalTitle" class="form-control" id="generalTitle" placeholder="Enter Title">
+                                
+                                    <label for="generalDescription" class="description">Description <span style="color: red;">*</span></label>
+                                    <textarea class="form-control" name="generalDescription" id="generalDescription" rows="5"></textarea>
+
+                                    <div class="custom-control custom-checkbox checkboxLearningMaterial">
+                                        <input type="checkbox" name="checkbox" class="custom-control-input" id="checkbox">
+                                        <label class="custom-control-label" for="checkbox">Make this downloadable to other schools</label>
+                                    </div>
+                                    <input type="file" name="filename" multiple accept="image/*, .doc, .docx, .pdf, .txt, .xlsx, .pptx">
+                                    <small id="fileHelp" class="form-text text-muted"><i>Upload image, word, powerpoint, excel or pdf files</i></small>
                                 </div>
-                            
-                            
+
+                                <div class="form-group">
+                                    <div class="text-center" style="margin-top: 40px;">
+                                        <h5>Add Activity</h5>
+                                    </div>
+                                    <label class="" for="activityTitle">Activity Title <span style="color: red;">*</span></label>
+                                    <input type="text" name="activityTitle" class="form-control" id="_title" placeholder="Enter Title">
+                                
+                                    <label for="activityDescription" class="description">Description <span style="color: red;">*</span></label>
+                                    <textarea class="form-control" name="activityDescription" id="_description" rows="5"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="text-center" style="margin-top: 40px;">
+                                        <h5>Add Reference</h5>
+                                    </div>
+                                    <label class="" for="refereceTitle">Reference <span style="color: red;">*</span></label>
+                                    <input type="text" name="reference" class="form-control" id="_reference" placeholder="Enter Reference">
+                                </div>
+
+                                <button class="btn btn-primary" type="submit">SUBMIT</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             </form>
-
-            
         </div>
     <% include ../partials/footer %>
     </body>
